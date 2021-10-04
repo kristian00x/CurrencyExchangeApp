@@ -11,12 +11,4 @@ public class Root implements Serializable {
         this.from = from;
         this.currencies = currencies;
     }
-
-    @Override
-    public String toString() {
-        return "Root{" +
-                "from='" + from + '\'' +
-                ", currencies=" + currencies +
-                '}';
-    }
 }

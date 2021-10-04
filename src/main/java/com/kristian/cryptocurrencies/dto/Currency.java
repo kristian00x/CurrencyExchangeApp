@@ -1,5 +1,7 @@
 package com.kristian.cryptocurrencies.dto;
 
+//TODO Builder!
+
 public class Currency {
 
     private String currency;
@@ -14,16 +16,5 @@ public class Currency {
         this.amount = amount;
         this.result = result;
         this.fee = fee;
-    }
-
-    @Override
-    public String toString() {
-        return "Currency{" +
-                "currency='" + currency + '\'' +
-                ", rate=" + rate +
-                ", amount=" + amount +
-                ", result=" + result +
-                ", fee=" + fee +
-                '}';
     }
 }
