@@ -1,5 +1,8 @@
 package com.kristian.cryptocurrencies;
 
+import com.kristian.cryptocurrencies.dto.ExchangeRequest;
+import com.kristian.cryptocurrencies.dto.Root;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -19,7 +22,7 @@ public class Controller {
     }
 
     @PostMapping("/currencies/exchange")
-    public String exchangeCryptocurrency(@RequestBody ExchangeRequest exchangeRequest) {
-        return currencyService.getCryptocurrencyExchangeForecast(exchangeRequest);
+    public ResponseEntity<Root> exchangeCryptocurrency(@RequestBody ExchangeRequest exchangeRequest) {
+        return ResponseEntity.ok(currencyService.getCryptocurrencyExchangeForecast(exchangeRequest));
     }
 }

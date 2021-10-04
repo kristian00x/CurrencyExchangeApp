@@ -1,4 +1,4 @@
-package com.kristian.cryptocurrencies;
+package com.kristian.cryptocurrencies.dto;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ public class ExchangeRequest {
 
     private List<String> to;
 
-//    @JsonProperty("amount")
     private double amount;
 
     public String getFrom() {
