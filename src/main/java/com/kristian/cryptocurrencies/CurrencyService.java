@@ -32,8 +32,8 @@ public class CurrencyService {
         for (String to : exchangeRequest.getTo()) {
             String uri = URI + exchangeRequest.getFrom() + "&interval=1d&convert=" + to;
             String response = sendRequestToApiProvider(uri);
-            currencies.add(new Currency(to, getPriceFromJson(response), exchangeRequest.getAmount(), exchangeRequest.getAmount() * getPriceFromJson(response), 0));
-        }
+            currencies.add(new Currency.CurrencyBuilder().currency(to).rate(getPriceFromJson(response)).amount(exchangeRequest.getAmount()).result(exchangeRequest.getAmount() * getPriceFromJson(response)).fee(0).build());
+        } // (to, getPriceFromJson(response), exchangeRequest.getAmount(), exchangeRequest.getAmount() * getPriceFromJson(response), 0));
         return new Root(exchangeRequest.getFrom(), currencies);
     }
 
