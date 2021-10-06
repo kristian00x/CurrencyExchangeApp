@@ -22,20 +22,40 @@ public class Currency {
         return currency;
     }
 
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public double getRate() {
         return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 
     public double getAmount() {
         return amount;
     }
 
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
     public double getResult() {
         return result;
     }
 
+    public void setResult(double result) {
+        this.result = result;
+    }
+
     public double getFee() {
         return fee;
+    }
+
+    public void setFee(double fee) {
+        this.fee = fee;
     }
 
     @Override
