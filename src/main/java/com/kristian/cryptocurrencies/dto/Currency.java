@@ -1,7 +1,5 @@
 package com.kristian.cryptocurrencies.dto;
 
-//TODO Builder!
-
 public class Currency {
 
     private String currency;
@@ -11,11 +9,11 @@ public class Currency {
     private double fee;
 
     public Currency(CurrencyBuilder currencyBuilder) {
-        this.currency = currency;
-        this.rate = rate;
-        this.amount = amount;
-        this.result = result;
-        this.fee = fee;
+        this.currency = currencyBuilder.currency;
+        this.rate = currencyBuilder.rate;
+        this.amount = currencyBuilder.amount;
+        this.result = currencyBuilder.result;
+        this.fee = currencyBuilder.fee;
     }
 
     public String getCurrency() {
