@@ -3,14 +3,15 @@ package com.kristian.cryptocurrencies;
 import com.kristian.cryptocurrencies.dto.Currency;
 import com.kristian.cryptocurrencies.dto.ExchangeRequest;
 import com.kristian.cryptocurrencies.dto.Root;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.kristian.cryptocurrencies.Util.getPriceFromJson;
+import static com.kristian.cryptocurrencies.Util.sendRequestToApiProvider;
 
 @Service
 public class CurrencyService {
@@ -33,24 +34,7 @@ public class CurrencyService {
             String uri = URI + exchangeRequest.getFrom() + "&interval=1d&convert=" + to;
             String response = sendRequestToApiProvider(uri);
             currencies.add(new Currency.CurrencyBuilder().currency(to).rate(getPriceFromJson(response)).amount(exchangeRequest.getAmount()).result(exchangeRequest.getAmount() * getPriceFromJson(response)).fee(0).build());
-        } // (to, getPriceFromJson(response), exchangeRequest.getAmount(), exchangeRequest.getAmount() * getPriceFromJson(response), 0));
-        return new Root(exchangeRequest.getFrom(), currencies);
-    }
-
-    private Double getPriceFromJson(String jsonString) {
-        // remove first and last character which is [ and ]
-        JSONObject obj = new JSONObject(jsonString.substring(1, jsonString.length() - 1));
-        return obj.getDouble("price");
-    }
-
-    private String sendRequestToApiProvider(String uri) {
-        // api provider require 1s pause/break between requests
-        try {
-            Thread.sleep(1_000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(uri, String.class);
+        return new Root(exchangeRequest.getFrom(), currencies);
     }
 }
