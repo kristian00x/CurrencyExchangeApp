@@ -1,0 +1,5 @@
+spring:
+  main:
+    banner-mode: off
+integration:
+  api_key: "INSERT_YOUR_KEY"
