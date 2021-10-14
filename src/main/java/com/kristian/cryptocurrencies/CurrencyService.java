@@ -3,6 +3,7 @@ package com.kristian.cryptocurrencies;
 import com.kristian.cryptocurrencies.dto.Currency;
 import com.kristian.cryptocurrencies.dto.ExchangeRequest;
 import com.kristian.cryptocurrencies.dto.Root;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,11 @@ import static com.kristian.cryptocurrencies.Util.getPriceFromJson;
 import static com.kristian.cryptocurrencies.Util.sendRequestToApiProvider;
 
 @Service
-@ConfigurationProperties("integration")
 public class CurrencyService {
 
     private final String URI = "https://api.nomics.com/v1/currencies/ticker?key=";
 
+    @Value("${integration.api_key}")
     private String apiKey;
 
     public Map<String, Double> getQuotationList(String baseCurrency, String filter) {
@@ -41,14 +42,5 @@ public class CurrencyService {
         }
         return new Root(exchangeRequest.getFrom(), currencies);
     }
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
 
 }
