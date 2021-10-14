@@ -34,11 +34,21 @@ public class CurrencyService {
     }
 
     public Root getCryptocurrencyExchangeForecast(ExchangeRequest exchangeRequest) {
+        final double FIXED_FEE = 0.5;
+        final double PROVISION_FEE = 0.01;
         List<Currency> currencies = new ArrayList<>();
         for (String to : exchangeRequest.getTo()) {
             String uri = URI + apiKey + "&ids=" + exchangeRequest.getFrom() + "&interval=1d&convert=" + to;
             String response = sendRequestToApiProvider(uri);
-            currencies.add(new Currency.CurrencyBuilder().currency(to).rate(getPriceFromJson(response)).amount(exchangeRequest.getAmount()).result(exchangeRequest.getAmount() * getPriceFromJson(response)).fee(0).build());
+            double totalValue = exchangeRequest.getAmount() * getPriceFromJson(response);
+            double fee = FIXED_FEE + PROVISION_FEE * totalValue;
+            currencies.add(new Currency.CurrencyBuilder()
+                    .currency(to)
+                    .rate(getPriceFromJson(response))
+                    .amount(exchangeRequest.getAmount())
+                    .result(totalValue - fee)
+                    .fee(fee)
+                    .build());
         }
         return new Root(exchangeRequest.getFrom(), currencies);
     }
