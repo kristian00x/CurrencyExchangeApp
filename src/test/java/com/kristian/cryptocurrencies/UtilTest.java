@@ -6,7 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UtilTest {
 
-    @Test void shouldReturnPriceForCorrectJson() {
+    @Test
+    void shouldReturnPriceForCorrectJson() {
         // given
         Double expectedPrice = Double.valueOf("226989.81838260");
         String jsonWithPrice = """
